@@ -5,18 +5,19 @@ const CheckboxHook = ({ control, text, ...props }) => {
   const { field } = useController({
     control,
     name: props.name,
+    defaultValue: false,
   });
   return (
     <label className="cursor-pointer custom-checkbox">
       <input
         type="checkbox"
-        {...field}
         value={props.value}
         className="hidden"
         id={props.name}
+        {...field}
       />
       <div className="flex items-center gap-x-3">
-        <div className="bg-white transition-all w-full h-full rounded-md flex items-center justify-center custom-checkbox-square">
+        <div className="flex items-center justify-center w-full h-full transition-all bg-white rounded-md custom-checkbox-square">
           <svg
             width="16"
             height="17"
