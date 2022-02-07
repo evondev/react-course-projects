@@ -62,15 +62,20 @@ const dropdownData = [
 const RegisterHook = () => {
   const {
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
     control,
     setValue,
     getValues,
     reset,
+    watch,
   } = useForm({
-    // resolver: yupResolver(schema),
-    // mode: "onChange",
+    resolver: yupResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      gender: "male",
+    },
   });
+
   // console.log("RegisterHook ~ isSubmitting", isSubmitting);
   // console.log("RegisterHook ~ errors", errors);
   const onSubmitHandler = (values) => {
@@ -82,14 +87,15 @@ const RegisterHook = () => {
           username: "",
           email: "",
           password: "",
-          gender: "",
+          gender: "male",
           job: "",
           term: false,
         });
-        console.log(values);
       }, 5000);
     });
   };
+  const watchGender = watch("gender");
+  console.log("RegisterHook ~ watchGender", watchGender);
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
@@ -145,7 +151,12 @@ const RegisterHook = () => {
         <label className="cursor-pointer">Gender</label>
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-x-3">
-            <RadioHook control={control} name="gender" value="male"></RadioHook>
+            <RadioHook
+              control={control}
+              name="gender"
+              value="male"
+              checked={watchGender === "male"}
+            ></RadioHook>
             <span>Male</span>
           </div>
           <div className="flex items-center gap-x-3">
@@ -153,6 +164,7 @@ const RegisterHook = () => {
               control={control}
               name="gender"
               value="female"
+              checked={watchGender === "female"}
             ></RadioHook>
             <span>Female</span>
           </div>
@@ -168,7 +180,7 @@ const RegisterHook = () => {
           setValue={setValue}
           name="job"
           data={dropdownData}
-          dropdownLabel="Please select"
+          dropdownLabel="Select your job"
         ></DropdownHook>
         {errors.job && (
           <p className="text-sm text-red-500">{errors.job.message}</p>
