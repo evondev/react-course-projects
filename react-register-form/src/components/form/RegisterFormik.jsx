@@ -79,6 +79,8 @@ const RegisterFormik = () => {
     >
       {(formik) => {
         const watchGender = formik.values.gender;
+        console.log("Rendering formik");
+
         return (
           <form
             onSubmit={formik.handleSubmit}

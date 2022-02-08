@@ -95,7 +95,7 @@ const RegisterHook = () => {
     });
   };
   const watchGender = watch("gender");
-  console.log("RegisterHook ~ watchGender", watchGender);
+  console.log("Rendering React hook form");
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
