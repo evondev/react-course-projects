@@ -10,6 +10,7 @@ const MovieList = ({ type = "now_playing" }) => {
     fetcher
   );
   const movies = data?.results || [];
+  console.log("MovieList ~ movies", movies);
   return (
     <div className="movie-list">
       <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={"auto"}>
