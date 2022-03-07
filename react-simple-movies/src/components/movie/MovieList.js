@@ -2,7 +2,7 @@ import React from "react";
 import { SwiperSlide, Swiper } from "swiper/react";
 import MovieCard from "./MovieCard";
 import useSWR from "swr";
-import { fetcher, tmdbAPI } from "../../config";
+import { fetcher, tmdbAPI } from "apiConfig/config";
 const MovieList = ({ type = "now_playing" }) => {
   const { data } = useSWR(tmdbAPI.getMovieList(type), fetcher);
   const movies = data?.results || [];
