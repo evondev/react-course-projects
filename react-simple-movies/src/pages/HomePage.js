@@ -8,7 +8,7 @@ const HomePage = () => {
         <h2 className="capitalize text-white mb-10 text-3xl font-bold">
           Now playing
         </h2>
-        <MovieList></MovieList>
+        <MovieList type="now_playing"></MovieList>
       </section>
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-10 text-3xl font-bold">
