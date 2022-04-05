@@ -1,9 +1,15 @@
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./contexts/auth-context";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
     <div>
-      <Routes></Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/sign-up" element={<SignUpPage></SignUpPage>}></Route>
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

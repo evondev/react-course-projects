@@ -7,7 +7,7 @@ import { GlobalStyles } from "./styles/GlobalStyles";
 import { theme } from "./utils/constants";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-const container = document.getElementById("app");
+const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(

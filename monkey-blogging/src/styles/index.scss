@@ -42,3 +42,13 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
