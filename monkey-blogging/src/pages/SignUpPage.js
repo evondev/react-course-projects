@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Label } from "components/label";
 import { Input } from "components/input";
+import { useForm } from "react-hook-form";
+import { Field } from "components/field";
+import { Button } from "components/button";
 
 const SignUpPageStyles = styled.div`
   min-height: 100vh;
@@ -16,12 +19,6 @@ const SignUpPageStyles = styled.div`
     font-size: 40px;
     margin-bottom: 60px;
   }
-  .field {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 20px;
-  }
 
   .form {
     max-width: 600px;
@@ -30,21 +27,62 @@ const SignUpPageStyles = styled.div`
 `;
 
 const SignUpPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    watch,
+    setValue,
+    reset,
+  } = useForm({
+    mode: "onChange",
+  });
+  const handleSignUpForm = (values) => {
+    console.log(values);
+  };
   return (
     <SignUpPageStyles>
       <div className="container">
         <img srcSet="/logo.png 2x" alt="monkey-blogging" className="logo" />
         <h1 className="heading">Monkey Blogging</h1>
-        <form className="form">
-          <div className="field">
+        <form className="form" onSubmit={handleSubmit(handleSignUpForm)}>
+          <Field>
             <Label htmlFor="fullname">Fullname</Label>
             <Input
-              id="fullname"
-              type="password"
-              className="input"
               placeholder="Enter your fullname"
+              control={control}
+              name="fullname"
+            ></Input>
+          </Field>
+          <Field>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              placeholder="Enter your Email"
+              control={control}
+              name="email"
+            ></Input>
+          </Field>
+          <Field>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              type="password"
+              placeholder="Enter your password"
+              control={control}
+              name="password"
               hasIcon
             ></Input>
+          </Field>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              style={{
+                width: "100%",
+                maxWidth: "350px",
+                margin: "0 auto",
+              }}
+            >
+              Sign Up
+            </Button>
           </div>
         </form>
       </div>

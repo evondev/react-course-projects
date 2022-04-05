@@ -1,6 +1,8 @@
 import { IconEyeOpen } from "components/icon";
 import React from "react";
 import styled from "styled-components";
+import { useController } from "react-hook-form";
+
 const InputStyles = styled.div`
   position: relative;
   width: 100%;
@@ -32,15 +34,21 @@ const InputStyles = styled.div`
   }
 `;
 const Input = ({
-  id = "",
+  name = "",
   type = "text",
   children,
   hasIcon = false,
+  control,
   ...props
 }) => {
+  const { field } = useController({
+    control,
+    name,
+    defaultValue: "",
+  });
   return (
     <InputStyles hasIcon={hasIcon}>
-      <input id={id} type={type} {...props} />
+      <input id={name} type={type} {...field} {...props} />
       {hasIcon ? <IconEyeOpen className="icon-eye"></IconEyeOpen> : null}
     </InputStyles>
   );
