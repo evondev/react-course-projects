@@ -1,3 +1,4 @@
 import IconEyeOpen from "./IconEyeOpen";
+import IconEyeClose from "./IconEyeClose";
 
-export { IconEyeOpen };
+export { IconEyeOpen, IconEyeClose };

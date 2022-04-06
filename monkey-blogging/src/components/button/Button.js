@@ -1,44 +1,41 @@
 import { LoadingSpinner } from "components/loading";
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+
 const ButtonStyles = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
   padding: 0 25px;
+  line-height: 1;
   color: white;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.primary};
-  cursor: pointer;
   font-weight: 600;
   font-size: 18px;
-  line-height: 1;
+  width: 100%;
+  height: ${(props) => props.height || "66px"};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    to right bottom,
+    ${(props) => props.theme.primary},
+    ${(props) => props.theme.secondary}
+  );
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
   }
-  height: ${(props) => props.height || "70px"};
-  ${(props) =>
-    props.buttonType === "primary" &&
-    css`
-      background-image: linear-gradient(
-        to right bottom,
-        ${(props) => props.theme.primary},
-        ${(props) => props.theme.secondary}
-      );
-    `};
 `;
 
 const Button = ({
-  children,
-  buttonType = "primary",
+  type = "button",
   onClick = () => {},
+  children,
   ...props
 }) => {
   const { isLoading } = props;
   const child = !!isLoading ? <LoadingSpinner></LoadingSpinner> : children;
   return (
-    <ButtonStyles buttonType={buttonType} onClick={onClick} {...props}>
+    <ButtonStyles type={type} onClick={onClick} {...props}>
       {child}
     </ButtonStyles>
   );

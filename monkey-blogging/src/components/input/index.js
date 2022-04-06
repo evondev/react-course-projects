@@ -1,3 +1,2 @@
-const { default: Input } = require("./Input");
-
+import Input from "./Input";
 export { Input };
