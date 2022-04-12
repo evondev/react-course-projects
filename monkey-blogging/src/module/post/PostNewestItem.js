@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
+import PostImage from "./PostImage";
 import PostMeta from "./PostMeta";
 import PostTitle from "./PostTitle";
 const PostNewestItemStyles = styled.div`
@@ -21,12 +22,7 @@ const PostNewestItemStyles = styled.div`
       flex-shrink: 0;
       width: 180px;
       height: 130px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-      }
+      border-radius: 12px;
     }
     &-category {
       margin-bottom: 8px;
@@ -40,12 +36,12 @@ const PostNewestItemStyles = styled.div`
 const PostNewestItem = () => {
   return (
     <PostNewestItemStyles>
-      <div className="post-image">
-        <img
-          src="https://images.unsplash.com/photo-1510519138101-570d1dca3d66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2294&q=80"
-          alt=""
-        />
-      </div>
+      <PostImage
+        url="https://images.unsplash.com/photo-1510519138101-570d1dca3d66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2294&q=80"
+        alt=""
+        to="/"
+      ></PostImage>
+
       <div className="post-content">
         <PostCategory type="secondary">Kiến thức</PostCategory>
         <PostTitle>
