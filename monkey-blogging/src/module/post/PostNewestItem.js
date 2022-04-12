@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PostCategory from "./PostCategory";
 const PostNewestItemStyles = styled.div`
   display: flex;
   align-items: center;
@@ -26,13 +27,6 @@ const PostNewestItemStyles = styled.div`
       }
     }
     &-category {
-      display: inline-block;
-      padding: 8px;
-      border-radius: 8px;
-      color: #6b6b6b;
-      font-size: 12px;
-      font-weight: 600;
-      background-color: white;
       margin-bottom: 8px;
     }
     &-info {
@@ -70,7 +64,7 @@ const PostNewestItem = () => {
         />
       </div>
       <div className="post-content">
-        <span className="post-category">Kiến thức</span>
+        <PostCategory type="secondary">Kiến thức</PostCategory>
         <h3 className="post-title">
           Hướng dẫn setup phòng cực chill dành cho người mới toàn tập
         </h3>
