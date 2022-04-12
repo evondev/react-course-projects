@@ -5,14 +5,15 @@
 5. Code trang SignUp - UI
 6. Code trang SignUp - React hook form
 7. Code trang SignUp - Authentication với Firebase
-8. Sử dụng PropTypes và comment params cho component -->
-
+8. Sử dụng PropTypes và comment params cho component
 9. Login UI
 10. Header UI
 11. Homepage UI
-12. Details UI
-13. Routing
-14. Add post Form
+-->
+
+12. Add post Form
+13. Details UI
+14. Routing
 15. Update post Form
 16. Table UI
 17. Category

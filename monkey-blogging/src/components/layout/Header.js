@@ -19,7 +19,7 @@ const menuLinks = [
 ];
 
 const HeaderStyles = styled.header`
-  padding: 40px 0;
+  padding: 20px 0;
   .header-main {
     display: flex;
     align-items: center;
@@ -58,6 +58,17 @@ const HeaderStyles = styled.header`
     top: 50%;
     transform: translateY(-50%);
     right: 25px;
+  }
+  @media screen and (max-width: 1023.98px) {
+    .logo {
+      max-width: 30px;
+    }
+    .menu,
+    .search,
+    .header-button,
+    .header-auth {
+      display: none;
+    }
   }
 `;
 function getLastName(name) {
