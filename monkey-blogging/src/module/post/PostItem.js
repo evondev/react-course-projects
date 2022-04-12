@@ -17,26 +17,10 @@ const PostItemStyles = styled.div`
       border-radius: 16px;
     }
     &-category {
-      margin-bottom: 16px;
-    }
-    &-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #6b6b6b;
-      margin-top: auto;
-    }
-    &-dot {
-      display: inline-block;
-      width: 4px;
-      height: 4px;
-      background-color: currentColor;
-      border-radius: 100rem;
+      margin-bottom: 10px;
     }
     &-title {
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
   }
   @media screen and (max-width: 1023.98px) {

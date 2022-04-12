@@ -72,7 +72,7 @@ a {
   }
   @media screen and (min-width: 1024px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 48px;
+    gap: 40px;
   }
   @media screen and (max-width: 1023.98px) {
     grid-auto-flow: column;
