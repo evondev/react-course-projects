@@ -1,23 +1,10 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   margin: 0;
   padding: 0;
 }
-
-html,
-body {
-  height: 100%;
-}
-body {
-  line-height: 1.5;
-  // -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 img,
 picture,
 video,
@@ -43,10 +30,15 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  color: #232323;
+@layer base {
+  body {
+    line-height: 1.5;
+    // -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: #232323;
+  }
 }
 .container {
   width: 100%;
@@ -94,5 +86,40 @@ a {
   padding-bottom: 40px;
   @media screen and (min-width: 1024px) {
     padding-bottom: 60px;
+  }
+}
+.entry-content {
+  h2,
+  h3,
+  h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+  p {
+    margin-bottom: 20px;
+    line-height: 2;
+    font-size: 16px;
+  }
+  figure {
+    margin-bottom: 20px;
+  }
+  figure img {
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: #6b6b6b;
   }
 }

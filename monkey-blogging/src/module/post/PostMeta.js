@@ -28,7 +28,7 @@ const PostMeta = ({
   className = "",
 }) => {
   return (
-    <PostMetaStyles className={className}>
+    <PostMetaStyles className={`post-meta ${className}`}>
       <span className="post-time">{date}</span>
       <span className="post-dot"></span>
       <span className="post-author">{authorName}</span>
