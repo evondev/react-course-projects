@@ -18,8 +18,8 @@ const PostAddNew = () => {
     },
   });
   const watchStatus = watch("status");
+  console.log("PostAddNew ~ watchStatus", watchStatus);
   const watchCategory = watch("category");
-  console.log("PostAddNew ~ watchCategory", watchCategory);
   return (
     <PostAddNewStyles>
       <h1 className="dashboard-heading">Add new post</h1>
@@ -50,7 +50,6 @@ const PostAddNew = () => {
                 name="status"
                 control={control}
                 checked={watchStatus === "approved"}
-                onClick={() => setValue("status", "approved")}
                 value="approved"
               >
                 Approved
@@ -59,7 +58,6 @@ const PostAddNew = () => {
                 name="status"
                 control={control}
                 checked={watchStatus === "pending"}
-                onClick={() => setValue("status", "pending")}
                 value="pending"
               >
                 Pending
@@ -68,7 +66,6 @@ const PostAddNew = () => {
                 name="status"
                 control={control}
                 checked={watchStatus === "reject"}
-                onClick={() => setValue("status", "reject")}
                 value="reject"
               >
                 Reject

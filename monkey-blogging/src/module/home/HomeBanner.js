@@ -22,6 +22,7 @@ const HomeBannerStyles = styled.div`
     &-heading {
       font-size: 36px;
       margin-bottom: 20px;
+      font-weight: bold;
     }
     &-desc {
       line-height: 1.75;
