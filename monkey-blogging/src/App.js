@@ -1,4 +1,5 @@
 import DashboardLayout from "module/dashboard/DashboardLayout";
+import PostAddNew from "module/post/PostAddNew";
 import PostManage from "module/post/PostManage";
 import DashboardPage from "pages/DashboardPage";
 import HomePage from "pages/HomePage";
@@ -31,6 +32,10 @@ function App() {
             <Route
               path="/manage/post"
               element={<PostManage></PostManage>}
+            ></Route>
+            <Route
+              path="/manage/add-post"
+              element={<PostAddNew></PostAddNew>}
             ></Route>
           </Route>
         </Routes>
