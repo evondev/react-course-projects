@@ -1,4 +1,5 @@
 import DashboardLayout from "module/dashboard/DashboardLayout";
+import PostManage from "module/post/PostManage";
 import DashboardPage from "pages/DashboardPage";
 import HomePage from "pages/HomePage";
 import NotFoundPage from "pages/NotFoundPage";
@@ -26,6 +27,10 @@ function App() {
             <Route
               path="/dashboard"
               element={<DashboardPage></DashboardPage>}
+            ></Route>
+            <Route
+              path="/manage/post"
+              element={<PostManage></PostManage>}
             ></Route>
           </Route>
         </Routes>
