@@ -9,15 +9,9 @@
 9. Login UI
 10. Header UI
 11. Homepage UI
--->
-
 12. Details UI
 13. Dashboard UI
-14. Add post Form
-15. Routing dynamic import
-16. Update post Form
-17. Table UI
-18. Category
-19. Users
-20. 404
-21. Checkbox, radio, toggle
+14. Checkbox, radio, toggle
+-->
+
+15. Add new post
