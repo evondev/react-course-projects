@@ -3,7 +3,7 @@ import { Radio } from "components/checkbox";
 import { Field } from "components/field";
 import { Input } from "components/input";
 import { Label } from "components/label";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 import styled from "styled-components";
@@ -11,33 +11,53 @@ import { postStatus } from "utils/constants";
 import ImageUpload from "components/image/ImageUpload";
 import useFirebaseImage from "hooks/useFirebaseImage";
 import Toggle from "components/toggle/Toggle";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "firebase-app/firebase-config";
+import { Dropdown } from "components/dropdown";
+import { useAuth } from "contexts/auth-context";
+import { toast } from "react-toastify";
 
 const PostAddNewStyles = styled.div``;
 const PostAddNew = () => {
-  const { control, watch, setValue, handleSubmit, getValues } = useForm({
+  const { userInfo } = useAuth();
+  const { control, watch, setValue, handleSubmit, getValues, reset } = useForm({
     mode: "onChange",
     defaultValues: {
       title: "",
       slug: "",
       status: 2,
-      category: "",
+      categoryId: "",
       hot: false,
+      image: "",
     },
   });
   const watchStatus = watch("status");
   const watchHot = watch("hot");
-  // const watchCategory = watch("category");
-  const addPostHandler = async (values) => {
-    const cloneValues = { ...values };
-    cloneValues.slug = slugify(values.slug || values.title);
-    cloneValues.status = Number(values.status);
-    console.log("addPostHandler ~ cloneValues", cloneValues);
-  };
-
   const { image, progress, handleSelectImage, handleDeleteImage } =
     useFirebaseImage(setValue, getValues);
+  const [categories, setCategories] = useState([]);
+  const [selectCategory, setSelectCategory] = useState("");
+  const addPostHandler = async (values) => {
+    const cloneValues = { ...values };
+    cloneValues.slug = slugify(values.slug || values.title, { lower: true });
+    cloneValues.status = Number(values.status);
+    const colRef = collection(db, "posts");
+    await addDoc(colRef, {
+      ...cloneValues,
+      image,
+      userId: userInfo.uid,
+    });
+    toast.success("Create new post successfully!");
+    reset({
+      title: "",
+      slug: "",
+      status: 2,
+      categoryId: "",
+      hot: false,
+      image: "",
+    });
+    setSelectCategory({});
+  };
 
   useEffect(() => {
     async function getData() {
@@ -46,16 +66,20 @@ const PostAddNew = () => {
       const querySnapshot = await getDocs(q);
       let result = [];
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         result.push({
           id: doc.id,
           ...doc.data(),
         });
       });
-      console.log("getData ~ result", result);
+      setCategories(result);
     }
     getData();
   }, []);
+
+  const handleClickOption = (item) => {
+    setValue("categoryId", item.id);
+    setSelectCategory(item);
+  };
 
   return (
     <PostAddNewStyles>
@@ -93,6 +117,25 @@ const PostAddNew = () => {
           </Field>
           <Field>
             <Label>Category</Label>
+            <Dropdown>
+              <Dropdown.Select placeholder="Select the category"></Dropdown.Select>
+              <Dropdown.List>
+                {categories.length > 0 &&
+                  categories.map((item) => (
+                    <Dropdown.Option
+                      key={item.id}
+                      onClick={() => handleClickOption(item)}
+                    >
+                      {item.name}
+                    </Dropdown.Option>
+                  ))}
+              </Dropdown.List>
+            </Dropdown>
+            {selectCategory?.name && (
+              <span className="inline-block p-3 rounded-lg bg-green-50 text-sm text-green-600 font-medium">
+                {selectCategory?.name}
+              </span>
+            )}
           </Field>
         </div>
         <div className="grid grid-cols-2 gap-x-10 mb-10">
