@@ -12,6 +12,8 @@
 12. Details UI
 13. Dashboard UI
 14. Checkbox, radio, toggle
+
+PostAddNew: clear image, add button loading
 -->
 
 15. Add new post: overview, upload image, delete image, toggle hot, find category

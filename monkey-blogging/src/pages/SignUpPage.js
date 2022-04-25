@@ -1,18 +1,19 @@
-import { Input } from "components/input";
-import { Label } from "components/label";
+import slugify from "slugify";
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Field } from "components/field";
-import { Button } from "components/button";
+import InputPasswordToggle from "components/input/InputPasswordToggle";
+import AuthenticationPage from "./AuthenticationPage";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "firebase-app/firebase-config";
 import { NavLink, useNavigate } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
-import AuthenticationPage from "./AuthenticationPage";
-import InputPasswordToggle from "components/input/InputPasswordToggle";
+import { Label } from "components/label";
+import { Input } from "components/input";
+import { Field } from "components/field";
+import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { Button } from "components/button";
+import { auth, db } from "firebase-app/firebase-config";
 
 const schema = yup.object({
   fullname: yup.string().required("Please enter your fullname"),
@@ -42,12 +43,14 @@ const SignUpPage = () => {
     await updateProfile(auth.currentUser, {
       displayName: values.fullname,
     });
-    const colRef = collection(db, "users");
-    await addDoc(colRef, {
+
+    await setDoc(doc(db, "users", auth.currentUser.uid), {
       fullname: values.fullname,
       email: values.email,
       password: values.password,
+      username: slugify(values.fullname, { lower: true }),
     });
+
     toast.success("Register successfully!!!");
     navigate("/");
   };
@@ -97,11 +100,7 @@ const SignUpPage = () => {
         </div>
         <Button
           type="submit"
-          style={{
-            width: "100%",
-            maxWidth: 300,
-            margin: "0 auto",
-          }}
+          className="w-full max-w-[300px] mx-auto"
           isLoading={isSubmitting}
           disabled={isSubmitting}
         >
