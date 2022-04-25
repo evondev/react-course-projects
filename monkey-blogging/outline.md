@@ -14,4 +14,12 @@
 14. Checkbox, radio, toggle
 -->
 
-15. Add new post
+15. Add new post: overview, upload image, delete image, toggle hot, find category
+16. Add new category
+17. Add new user
+18. Update post: ckeditor
+19. Update category
+20. Update user
+21. Display data
+22. Pagination data
+23. Filter data

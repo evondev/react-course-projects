@@ -6,6 +6,7 @@
 - image
 - createdAt
 - status: 1(approved) 2(pending) 3(reject)
+- hot(true or false)
 - content
 - userId
 - categoryId
