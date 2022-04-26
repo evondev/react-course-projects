@@ -12,16 +12,13 @@
 12. Details UI
 13. Dashboard UI
 14. Checkbox, radio, toggle
+15. Add new post: overview, upload image, delete image, toggle hot, find category
 
-PostAddNew: clear image, add button loading
 -->
 
-15. Add new post: overview, upload image, delete image, toggle hot, find category
-16. Add new category
-17. Add new user
-18. Update post: ckeditor
-19. Update category
-20. Update user
-21. Display data
-22. Pagination data
-23. Filter data
+16. Display(Pagination, Filter), Add, Update & Delete Category
+17. Display(Pagination, Filter), Add, Update & Delete User
+18. Display, Delete Post
+19. Optimize source code(PropTypes, logic, error boundary)
+20. Responsive and optimize UI UX
+21. Update post with ckeditor

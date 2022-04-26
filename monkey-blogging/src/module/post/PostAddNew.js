@@ -107,7 +107,8 @@ const PostAddNew = () => {
 
   return (
     <>
-      <h1 className="dashboard-heading">Add new post</h1>
+      <h1 className="dashboard-heading">Add post</h1>
+      <p className="dashboard-short-desc">Add new post</p>
       <form onSubmit={handleSubmit(addPostHandler)}>
         <div className="grid grid-cols-2 gap-x-10 mb-10">
           <Field>
