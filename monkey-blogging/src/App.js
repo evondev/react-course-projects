@@ -1,6 +1,9 @@
+import CategoryAddNew from "module/category/CategoryAddNew";
 import DashboardLayout from "module/dashboard/DashboardLayout";
 import PostAddNew from "module/post/PostAddNew";
 import PostManage from "module/post/PostManage";
+import UserAddNew from "module/user/UserAddNew";
+import UserProfile from "module/user/UserProfile";
 import DashboardPage from "pages/DashboardPage";
 import HomePage from "pages/HomePage";
 import PageNotFound from "pages/PageNotFound";
@@ -36,6 +39,18 @@ function App() {
             <Route
               path="/manage/add-post"
               element={<PostAddNew></PostAddNew>}
+            ></Route>
+            <Route
+              path="/manage/add-category"
+              element={<CategoryAddNew></CategoryAddNew>}
+            ></Route>
+            <Route
+              path="/manage/add-user"
+              element={<UserAddNew></UserAddNew>}
+            ></Route>
+            <Route
+              path="/profile"
+              element={<UserProfile></UserProfile>}
             ></Route>
           </Route>
         </Routes>

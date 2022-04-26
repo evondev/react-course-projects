@@ -10,7 +10,7 @@ import { Radio } from "components/checkbox";
 import { postStatus } from "utils/constants";
 import { Label } from "components/label";
 import { Input } from "components/input";
-import { Field } from "components/field";
+import { Field, FieldCheckboxes } from "components/field";
 import { Dropdown } from "components/dropdown";
 import { db } from "firebase-app/firebase-config";
 import { Button } from "components/button";
@@ -22,6 +22,7 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
+import DashboardHeading from "module/dashboard/DashboardHeading";
 
 const PostAddNew = () => {
   const { userInfo } = useAuth();
@@ -107,8 +108,7 @@ const PostAddNew = () => {
 
   return (
     <>
-      <h1 className="dashboard-heading">Add post</h1>
-      <p className="dashboard-short-desc">Add new post</p>
+      <DashboardHeading title="Add post" desc="Add new post"></DashboardHeading>
       <form onSubmit={handleSubmit(addPostHandler)}>
         <div className="form-layout">
           <Field>
@@ -173,7 +173,7 @@ const PostAddNew = () => {
           </Field>
           <Field>
             <Label>Status</Label>
-            <div className="flex items-center gap-5 flex-wrap">
+            <FieldCheckboxes>
               <Radio
                 name="status"
                 control={control}
@@ -198,7 +198,7 @@ const PostAddNew = () => {
               >
                 Reject
               </Radio>
-            </div>
+            </FieldCheckboxes>
           </Field>
         </div>
         <Button
