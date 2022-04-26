@@ -27,6 +27,18 @@ const DashboardStyles = styled.div`
       gap: 0 40px;
       align-items: start;
     }
+    @media screen and (max-width: 1023.98px) {
+      &-heading {
+        font-size: 20px;
+      }
+      &-short-desc {
+        margin-bottom: 25px;
+      }
+      &-main {
+        grid-template-columns: 100%;
+        padding: 20px;
+      }
+    }
   }
 `;
 const DashboardLayout = ({ children }) => {
