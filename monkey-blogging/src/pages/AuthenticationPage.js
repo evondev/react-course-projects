@@ -21,6 +21,7 @@ const AuthenticationPageStyles = styled.div`
   }
   .have-account {
     margin-bottom: 20px;
+    font-size: 14px;
     a {
       display: inline-block;
       color: ${(props) => props.theme.primary};

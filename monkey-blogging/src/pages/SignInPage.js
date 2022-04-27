@@ -51,8 +51,13 @@ const SignInPage = () => {
   }, [userInfo]);
   const handleSignIn = async (values) => {
     if (!isValid) return;
-    await signInWithEmailAndPassword(auth, values.email, values.password);
-    navigate("/");
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      navigate("/");
+    } catch (error) {
+      if (error.message.includes("wrong-password"))
+        toast.error("It seems your password was wrong");
+    }
   };
 
   return (
