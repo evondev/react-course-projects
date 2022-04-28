@@ -17,8 +17,10 @@
 -->
 
 16. Display(Pagination, Filter), Add, Update & Delete Category
-17. Display(Pagination, Filter), Add, Update & Delete User
-18. Display, Delete Post
-19. Optimize source code(PropTypes, logic, error boundary)
-20. Responsive and optimize UI UX
-21. Update post with ckeditor
+17. Re-analyze database for Post
+18. Display(Pagination, Filter), Add, Update & Delete User
+19. Display, Delete Post
+20. Optimize source code(PropTypes, logic, error boundary)
+21. Responsive and optimize UI UX
+22. Update post with React quill
+23. Upload image in react quill
