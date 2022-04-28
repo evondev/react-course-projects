@@ -15,9 +15,11 @@ import DashboardHeading from "module/dashboard/DashboardHeading";
 import React, { useEffect, useState } from "react";
 import { categoryStatus } from "utils/constants";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CategoryManage = () => {
   const [categoryList, setCategoryList] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const colRef = collection(db, "categories");
     onSnapshot(colRef, (snapshot) => {
@@ -75,17 +77,21 @@ const CategoryManage = () => {
                   <span className="italic text-gray-400">{category.slug}</span>
                 </td>
                 <td>
-                  {category.status === categoryStatus.APPROVED && (
+                  {Number(category.status) === categoryStatus.APPROVED && (
                     <LabelStatus type="success">Approved</LabelStatus>
                   )}
-                  {category.status === categoryStatus.UNAPPROVED && (
+                  {Number(category.status) === categoryStatus.UNAPPROVED && (
                     <LabelStatus type="warning">Unapproved</LabelStatus>
                   )}
                 </td>
                 <td>
                   <div className="flex items-center gap-x-3">
                     <ActionView></ActionView>
-                    <ActionEdit></ActionEdit>
+                    <ActionEdit
+                      onClick={() =>
+                        navigate(`/manage/update-category?id=${category.id}`)
+                      }
+                    ></ActionEdit>
                     <ActionDelete
                       onClick={() => handleDeleteCategory(category.id)}
                     ></ActionDelete>
