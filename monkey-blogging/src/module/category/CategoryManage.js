@@ -1,16 +1,19 @@
 import { ActionDelete, ActionEdit, ActionView } from "components/action";
+import { Button } from "components/button";
 import { LabelStatus } from "components/label";
 import { Table } from "components/table";
 import DashboardHeading from "module/dashboard/DashboardHeading";
-import React from "react";
+import React, { useState } from "react";
 
 const CategoryManage = () => {
+  const [categories, setCategories] = useState([]);
   return (
     <div>
-      <DashboardHeading
-        title="Categories"
-        desc="Manage your category"
-      ></DashboardHeading>
+      <DashboardHeading title="Categories" desc="Manage your category">
+        <Button kind="ghost" height="60px" to="/manage/add-category">
+          Create category
+        </Button>
+      </DashboardHeading>
       <Table>
         <thead>
           <tr>

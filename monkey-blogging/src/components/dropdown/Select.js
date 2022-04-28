@@ -5,7 +5,7 @@ const Select = ({ placeholder = "", className = "" }) => {
   const { toggle, show } = useDropdown();
   return (
     <div
-      className={`flex items-center justify-between py-[15px] px-[25px] bg-white border border-grayf1 rounded-lg cursor-pointer font-medium ${className}`}
+      className={`flex items-center justify-between py-4 px-5 bg-white border border-grayf1 rounded-lg cursor-pointer text-sm text-[#B2B3BD] ${className}`}
       onClick={toggle}
     >
       <span>{placeholder}</span>
