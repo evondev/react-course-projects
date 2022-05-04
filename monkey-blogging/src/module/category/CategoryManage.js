@@ -8,22 +8,35 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
+  limit,
   onSnapshot,
+  query,
+  where,
 } from "firebase/firestore";
 import DashboardHeading from "module/dashboard/DashboardHeading";
 import React, { useEffect, useState } from "react";
 import { categoryStatus } from "utils/constants";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 
 const CategoryManage = () => {
   const [categoryList, setCategoryList] = useState([]);
+  const [categoryCount, setCategoryCount] = useState(0);
   const navigate = useNavigate();
+  const [filter, setFilter] = useState("");
   useEffect(() => {
     const colRef = collection(db, "categories");
-    onSnapshot(colRef, (snapshot) => {
+    const newRef = filter
+      ? query(
+          colRef,
+          where("name", ">=", filter),
+          where("name", "<=", filter + "utf8")
+        )
+      : colRef;
+    onSnapshot(newRef, (snapshot) => {
       let results = [];
+      setCategoryCount(Number(snapshot.size));
       snapshot.forEach((doc) => {
         results.push({
           id: doc.id,
@@ -32,7 +45,7 @@ const CategoryManage = () => {
       });
       setCategoryList(results);
     });
-  }, []);
+  }, [filter]);
   const handleDeleteCategory = async (docId) => {
     const colRef = doc(db, "categories", docId);
     Swal.fire({
@@ -50,6 +63,9 @@ const CategoryManage = () => {
       }
     });
   };
+  const handleInputFilter = debounce((e) => {
+    setFilter(e.target.value);
+  }, 500);
   return (
     <div>
       <DashboardHeading title="Categories" desc="Manage your category">
@@ -57,6 +73,14 @@ const CategoryManage = () => {
           Create category
         </Button>
       </DashboardHeading>
+      <div className="flex justify-end mb-10">
+        <input
+          type="text"
+          placeholder="Search category..."
+          className="px-5 py-4 border border-gray-300 rounded-lg outline-none"
+          onChange={handleInputFilter}
+        />
+      </div>
       <Table>
         <thead>
           <tr>

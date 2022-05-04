@@ -17,8 +17,8 @@
 -->
 
 16. Display(Pagination, Filter), Add, Update & Delete Category
-17. Re-analyze database for Post
-18. Display(Pagination, Filter), Add, Update & Delete User
+17. Display(Pagination, Filter), Add, Update & Delete User
+18. Re-analyze database for Post
 19. Display, Delete Post
 20. Optimize source code(PropTypes, logic, error boundary)
 21. Responsive and optimize UI UX
