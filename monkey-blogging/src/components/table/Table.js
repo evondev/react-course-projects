@@ -13,6 +13,7 @@ const TableStyles = styled.div`
   th,
   td {
     vertical-align: middle;
+    white-space: nowrap;
   }
   th {
     padding: 20px 30px;

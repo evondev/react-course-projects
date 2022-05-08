@@ -1,5 +1,6 @@
 import DashboardHeading from "module/dashboard/DashboardHeading";
-import React from "react";
+import React, { useState } from "react";
+import UserTable from "./UserTable";
 
 const UserManage = () => {
   return (
@@ -8,6 +9,7 @@ const UserManage = () => {
         title="Users"
         desc="Manage your user"
       ></DashboardHeading>
+      <UserTable></UserTable>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
 const ImageUpload = (props) => {
   const {
@@ -21,7 +22,7 @@ const ImageUpload = (props) => {
         {...rest}
       />
       {progress !== 0 && !image && (
-        <div className="loading w-16 h-16 border-8 border-green-500 border-t-transparent animate-spin absolute z-10 rounded-full"></div>
+        <div className="absolute z-10 w-16 h-16 border-8 border-green-500 rounded-full loading border-t-transparent animate-spin"></div>
       )}
       {!image && progress === 0 && (
         <div className="flex flex-col items-center text-center pointer-events-none">
@@ -35,15 +36,15 @@ const ImageUpload = (props) => {
       )}
       {image && (
         <Fragment>
-          <img src={image} className="w-full h-full object-cover" alt="" />
+          <img src={image} className="object-cover w-full h-full" alt="" />
           <button
             type="button"
-            className="w-16 h-16 bg-white rounded-full flex items-center justify-center cursor-pointer absolute z-10 text-red-500 opacity-0 invisible transition-all group-hover:opacity-100 group-hover:visible"
+            className="absolute z-10 flex items-center justify-center invisible w-16 h-16 text-red-500 transition-all bg-white rounded-full opacity-0 cursor-pointer group-hover:opacity-100 group-hover:visible"
             onClick={handleDeleteImage}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="w-6 h-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -60,7 +61,7 @@ const ImageUpload = (props) => {
       )}
       {!image && (
         <div
-          className="absolute w-10 h-1 bg-green-400 bottom-0 left-0 transition-all image-upload-progress"
+          className="absolute bottom-0 left-0 w-10 h-1 transition-all bg-green-400 image-upload-progress"
           style={{
             width: `${Math.ceil(progress)}%`,
           }}
@@ -69,5 +70,10 @@ const ImageUpload = (props) => {
     </label>
   );
 };
-
+ImageUpload.propTypes = {
+  name: PropTypes.string,
+  className: PropTypes.string,
+  progress: PropTypes.number,
+  image: PropTypes.string,
+};
 export default ImageUpload;

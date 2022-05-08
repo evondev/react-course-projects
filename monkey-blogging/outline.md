@@ -13,10 +13,10 @@
 13. Dashboard UI
 14. Checkbox, radio, toggle
 15. Add new post: overview, upload image, delete image, toggle hot, find category
+16. Display(Pagination, Filter), Add, Update & Delete Category
 
 -->
 
-16. Display(Pagination, Filter), Add, Update & Delete Category
 17. Display(Pagination, Filter), Add, Update & Delete User
 18. Re-analyze database for Post
 19. Display, Delete Post

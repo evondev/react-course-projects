@@ -57,7 +57,7 @@ const PageNotFound = () => {
           Chances are your spelled something wrong, so can you double check the
           URL?
         </p>
-        <button onClick={() => navigate(-1)} className="back">
+        <button onClick={() => navigate("/")} className="back">
           Go back
         </button>
       </div>
