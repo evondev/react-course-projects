@@ -14,13 +14,11 @@
 14. Checkbox, radio, toggle
 15. Add new post: overview, upload image, delete image, toggle hot, find category
 16. Display(Pagination, Filter), Add, Update & Delete Category
+17. Display(Pagination, Filter), Add, Update & Delete User
+18. Re-analyze database for Post
 
 -->
 
-17. Display(Pagination, Filter), Add, Update & Delete User
-18. Re-analyze database for Post
-19. Display, Delete Post
-20. Optimize source code(PropTypes, logic, error boundary)
-21. Responsive and optimize UI UX
-22. Update post with React quill
-23. Upload image in react quill
+19. Display, Filter, Add, Update & Delete Post
+20. Update post with React quill
+21. Optimize source code(PropTypes, logic, error boundary, services, UI UX...)

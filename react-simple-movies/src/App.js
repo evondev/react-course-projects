@@ -1,3 +1,4 @@
+import MoviePage from "pages/MoviePage";
 import { Fragment, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "swiper/scss";
@@ -27,7 +28,7 @@ function App() {
                 </>
               }
             ></Route>
-            <Route path="/movies" element={<MoviePageV2></MoviePageV2>}></Route>
+            <Route path="/movies" element={<MoviePage></MoviePage>}></Route>
             <Route
               path="/movie/:movieId"
               element={<MovieDetailsPage></MovieDetailsPage>}
