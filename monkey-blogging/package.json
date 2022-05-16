@@ -10,6 +10,7 @@
     "@tinymce/tinymce-react": "^4.0.0",
     "axios": "^0.26.1",
     "firebase": "^9.6.10",
+    "html-react-parser": "^1.4.12",
     "lodash": "^4.17.21",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",
