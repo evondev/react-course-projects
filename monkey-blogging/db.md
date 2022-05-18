@@ -8,7 +8,9 @@
 - status: 1(approved) 2(pending) 3(reject)
 - hot(true or false)
 - content
+- userId
 - user: id, username, fullname, avatar, description
+- categoryId
 - category: id, name, slug
 
 # Category

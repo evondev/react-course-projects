@@ -9,6 +9,7 @@ import UserAddNew from "module/user/UserAddNew";
 import UserManage from "module/user/UserManage";
 import UserProfile from "module/user/UserProfile";
 import UserUpdate from "module/user/UserUpdate";
+import CategoryPage from "pages/CategoryPage";
 import DashboardPage from "pages/DashboardPage";
 import HomePage from "pages/HomePage";
 import PageNotFound from "pages/PageNotFound";
@@ -28,6 +29,10 @@ function App() {
           <Route path="/sign-in" element={<SignInPage></SignInPage>}></Route>
 
           <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
+          <Route
+            path="/category/:slug"
+            element={<CategoryPage></CategoryPage>}
+          ></Route>
           <Route
             path="/:slug"
             element={<PostDetailsPage></PostDetailsPage>}
