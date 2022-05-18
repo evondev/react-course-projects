@@ -95,7 +95,7 @@ const UserTable = () => {
         <td>{renderLabelStatus(Number(user?.status))}</td>
         <td>{renderRoleLabel(Number(user.role))}</td>
         <td>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-3 text-gray-500">
             <ActionEdit
               onClick={() => navigate(`/manage/update-user?id=${user.id}`)}
             ></ActionEdit>

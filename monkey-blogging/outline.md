@@ -19,10 +19,15 @@
 19. Display, Filter, Add, Update & Delete Post
 20. Update post with React quill
 21. Handle upload image in React quill
+22. Update auth information
 
 -->
 
-22. Update profile
-23. Update auth information
-24. Optimize source code(PropTypes, logic, error boundary, services, UI UX...)
-25. Congratulations 🎉
+23. Optimize source code(PropTypes, logic, error boundary, routes, UI UX...)
+24. Congratulations 🎉
+<!-- Challenges
+
+- Update profile
+- Author Page
+
+  -->

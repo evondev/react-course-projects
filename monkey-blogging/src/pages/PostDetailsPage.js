@@ -8,9 +8,11 @@ import parse from "html-react-parser";
 import PageNotFound from "./PageNotFound";
 import Layout from "components/layout/Layout";
 import AuthorBox from "components/author/AuthorBox";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { db } from "firebase-app/firebase-config";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useAuth } from "contexts/auth-context";
+import { userRole } from "utils/constants";
 const PostDetailsPageStyles = styled.div`
   padding-bottom: 100px;
   .post {
@@ -107,7 +109,11 @@ const PostDetailsPage = () => {
       const colRef = query(collection(db, "posts"), where("slug", "==", slug));
       onSnapshot(colRef, (snapshot) => {
         snapshot.forEach((doc) => {
-          doc.data() && setPostInfo(doc.data());
+          doc.data() &&
+            setPostInfo({
+              id: doc.id,
+              ...doc.data(),
+            });
         });
       });
     }
@@ -116,9 +122,11 @@ const PostDetailsPage = () => {
   useEffect(() => {
     document.body.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [slug]);
+  const { userInfo } = useAuth();
   if (!slug) return <PageNotFound></PageNotFound>;
   if (!postInfo.title) return null;
   const { user } = postInfo;
+  console.log("PostDetailsPage ~ postInfo", postInfo);
   return (
     <PostDetailsPageStyles>
       <Layout>
@@ -134,10 +142,25 @@ const PostDetailsPage = () => {
               </PostCategory>
               <h1 className="post-heading">{postInfo.title}</h1>
               <PostMeta></PostMeta>
+              {/* Check if user role is ADMIN then can edit the post */}
+              {userInfo.role === userRole.ADMIN && (
+                <Link
+                  to={`/manage/update-post?id=${postInfo.id}`}
+                  className="mt-5 inline-block py-2 px-4 border border-gray-400 rounded-md text-sm"
+                >
+                  Edit post
+                </Link>
+              )}
             </div>
           </div>
           <div className="post-content">
-            <div className="entry-content">{parse(postInfo.content || "")}</div>
+            <div
+              className="entry-content"
+              // Prevent XSS Attack recommen from React Docs
+              dangerouslySetInnerHTML={{
+                __html: parse(postInfo.content || ""),
+              }}
+            ></div>
             <AuthorBox userId={user.id}></AuthorBox>
           </div>
           <PostRelated categoryId={postInfo?.category?.id}></PostRelated>
