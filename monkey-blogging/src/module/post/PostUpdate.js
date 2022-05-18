@@ -18,19 +18,31 @@ import {
 } from "firebase/firestore";
 import useFirebaseImage from "hooks/useFirebaseImage";
 import DashboardHeading from "module/dashboard/DashboardHeading";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { postStatus } from "utils/constants";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
+import ImageUploader from "quill-image-uploader";
+import axios from "axios";
+import { imgbbAPI } from "config/apiConfig";
+Quill.register("modules/imageUploader", ImageUploader);
+
 const PostUpdate = () => {
   const [params] = useSearchParams();
   const postId = params.get("id");
-  const [loading, setLoading] = useState(false);
   const [content, setContent] = useState("");
-  const { handleSubmit, control, setValue, watch, reset, getValues } = useForm({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    reset,
+    getValues,
+    formState: { isValid, isSubmitting },
+  } = useForm({
     mode: "onChange",
   });
   const imageUrl = getValues("image");
@@ -57,6 +69,7 @@ const PostUpdate = () => {
       if (docSnapshot.data()) {
         reset(docSnapshot.data());
         setSelectCategory(docSnapshot.data()?.category || "");
+        setContent(docSnapshot.data()?.content || "");
       }
     }
     fetchData();
@@ -89,12 +102,43 @@ const PostUpdate = () => {
     setSelectCategory(item);
   };
   const updatePostHandler = async (values) => {
+    if (!isValid) return;
     const docRef = doc(db, "posts", postId);
     await updateDoc(docRef, {
+      ...values,
       content,
     });
     toast.success("Update post successfully!");
   };
+  const modules = useMemo(
+    () => ({
+      toolbar: [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote"],
+        [{ header: 1 }, { header: 2 }], // custom button values
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["link", "image"],
+      ],
+      imageUploader: {
+        // imgbbAPI
+        upload: async (file) => {
+          const bodyFormData = new FormData();
+          bodyFormData.append("image", file);
+          const response = await axios({
+            method: "post",
+            url: imgbbAPI,
+            data: bodyFormData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          return response.data.data.url;
+        },
+      },
+    }),
+    []
+  );
   if (!postId) return null;
   return (
     <>
@@ -160,7 +204,12 @@ const PostUpdate = () => {
           <Field>
             <Label>Content</Label>
             <div className="w-full entry-content">
-              <ReactQuill theme="snow" value={content} onChange={setContent} />
+              <ReactQuill
+                modules={modules}
+                theme="snow"
+                value={content}
+                onChange={setContent}
+              />
             </div>
           </Field>
         </div>
@@ -205,8 +254,8 @@ const PostUpdate = () => {
         <Button
           type="submit"
           className="mx-auto w-[250px]"
-          isLoading={loading}
-          disabled={loading}
+          isLoading={isSubmitting}
+          disabled={isSubmitting}
         >
           Update post
         </Button>

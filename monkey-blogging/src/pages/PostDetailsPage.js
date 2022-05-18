@@ -1,20 +1,13 @@
 import Heading from "components/layout/Heading";
 import Layout from "components/layout/Layout";
 import { db } from "firebase-app/firebase-config";
-import {
-  collection,
-  doc,
-  getDoc,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import PostCategory from "module/post/PostCategory";
 import PostImage from "module/post/PostImage";
 import PostItem from "module/post/PostItem";
 import PostMeta from "module/post/PostMeta";
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import PageNotFound from "./PageNotFound";
 import parse from "html-react-parser";
@@ -120,8 +113,7 @@ const PostDetailsPage = () => {
     }
     fetchData();
   }, [slug]);
-  if (!slug) return <PageNotFound></PageNotFound>;
-  if (!postInfo.title) return null;
+  if (!slug || !postInfo.title) return <PageNotFound></PageNotFound>;
   const { user } = postInfo;
   return (
     <PostDetailsPageStyles>

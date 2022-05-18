@@ -17,11 +17,11 @@
 17. Display(Pagination, Filter), Add, Update & Delete User
 18. Re-analyze database for Post
 19. Display, Filter, Add, Update & Delete Post
+20. Update post with React quill
+21. Handle upload image in React quill
 
 -->
 
-20. Update post with React quill
-21. Handle upload image in React quill
 22. Update profile
 23. Update auth information
 24. Optimize source code(PropTypes, logic, error boundary, services, UI UX...)
