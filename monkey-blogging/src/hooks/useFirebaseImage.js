@@ -39,6 +39,7 @@ export default function useFirebaseImage(
       },
       (error) => {
         console.log("Error");
+        setImage("");
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -71,6 +72,7 @@ export default function useFirebaseImage(
       .catch((error) => {
         console.log("handleDeleteImage ~ error", error);
         console.log("Can not delete image");
+        setImage("");
       });
   };
   const handleResetUpload = () => {
