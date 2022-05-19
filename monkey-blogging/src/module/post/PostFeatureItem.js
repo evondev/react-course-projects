@@ -5,6 +5,7 @@ import PostTitle from "./PostTitle";
 import PostMeta from "./PostMeta";
 import PostImage from "./PostImage";
 import PostCategory from "./PostCategory";
+import { withErrorBoundary } from "react-error-boundary";
 
 const PostFeatureItemStyles = styled.div`
   width: 100%;
@@ -80,5 +81,11 @@ const PostFeatureItem = ({ data }) => {
     </PostFeatureItemStyles>
   );
 };
-
-export default PostFeatureItem;
+// Example of error boundary
+export default withErrorBoundary(PostFeatureItem, {
+  FallbackComponent: (
+    <p className="p-3 text-red-500 bg-red-100">
+      Look like this component error
+    </p>
+  ),
+});

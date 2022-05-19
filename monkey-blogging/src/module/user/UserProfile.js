@@ -19,7 +19,7 @@ const UserProfile = () => {
       ></DashboardHeading>
       <form>
         <div className="text-center mb-10">
-          <ImageUpload className="w-[200px] h-[200px] !rounded-full min-h-0 mx-auto"></ImageUpload>
+          <ImageUpload className="!w-[200px] h-[200px] !rounded-full min-h-0 mx-auto"></ImageUpload>
         </div>
         <div className="form-layout">
           <Field>
