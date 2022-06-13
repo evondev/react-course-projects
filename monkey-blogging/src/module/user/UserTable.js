@@ -1,6 +1,7 @@
 import { ActionDelete, ActionEdit } from "components/action";
 import { LabelStatus } from "components/label";
 import { Table } from "components/table";
+import { useAuth } from "contexts/auth-context";
 import { db } from "firebase-app/firebase-config";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -51,7 +52,12 @@ const UserTable = () => {
         break;
     }
   };
+  const { userInfo } = useAuth();
   const handleDeleteUser = async (user) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      Swal.fire("Failed", "You have no right to do this action", "warning");
+      return;
+    }
     const colRef = doc(db, "users", user.id);
     Swal.fire({
       title: "Are you sure?",
@@ -65,7 +71,7 @@ const UserTable = () => {
       if (result.isConfirmed) {
         await deleteDoc(colRef);
         toast.success("Delete user successfully");
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "The user has been deleted.", "success");
       }
     });
   };
@@ -95,7 +101,7 @@ const UserTable = () => {
         <td>{renderLabelStatus(Number(user?.status))}</td>
         <td>{renderRoleLabel(Number(user.role))}</td>
         <td>
-          <div className="flex items-center gap-x-3 text-gray-500">
+          <div className="flex items-center text-gray-500 gap-x-3">
             <ActionEdit
               onClick={() => navigate(`/manage/update-user?id=${user.id}`)}
             ></ActionEdit>

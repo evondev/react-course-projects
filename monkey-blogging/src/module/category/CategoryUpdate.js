@@ -3,6 +3,7 @@ import { Radio } from "components/checkbox";
 import { Field } from "components/field";
 import { Input } from "components/input";
 import { Label } from "components/label";
+import { useAuth } from "contexts/auth-context";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import DashboardHeading from "module/dashboard/DashboardHeading";
@@ -11,7 +12,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import slugify from "slugify";
-import { categoryStatus } from "utils/constants";
+import Swal from "sweetalert2";
+import { categoryStatus, userRole } from "utils/constants";
 
 const CategoryUpdate = () => {
   const {
@@ -36,7 +38,13 @@ const CategoryUpdate = () => {
     fetchData();
   }, [categoryId, reset]);
   const watchStatus = watch("status");
+  const { userInfo } = useAuth();
+
   const handleUpdateCategory = async (values) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      Swal.fire("Failed", "You have no right to do this action", "warning");
+      return;
+    }
     const colRef = doc(db, "categories", categoryId);
     await updateDoc(colRef, {
       name: values.name,

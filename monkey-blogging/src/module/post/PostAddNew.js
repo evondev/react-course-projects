@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "contexts/auth-context";
 import { toast } from "react-toastify";
 import { Radio } from "components/checkbox";
-import { postStatus } from "utils/constants";
+import { postStatus, userRole } from "utils/constants";
 import { Label } from "components/label";
 import { Input } from "components/input";
 import { Field, FieldCheckboxes } from "components/field";
@@ -25,6 +25,7 @@ import {
   where,
 } from "firebase/firestore";
 import DashboardHeading from "module/dashboard/DashboardHeading";
+import Swal from "sweetalert2";
 
 const PostAddNew = () => {
   const { userInfo } = useAuth();
@@ -71,6 +72,10 @@ const PostAddNew = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo.email]);
   const addPostHandler = async (values) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      Swal.fire("Failed", "You have no right to do this action", "warning");
+      return;
+    }
     setLoading(true);
     try {
       const cloneValues = { ...values };

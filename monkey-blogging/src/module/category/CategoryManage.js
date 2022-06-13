@@ -17,10 +17,11 @@ import {
 } from "firebase/firestore";
 import DashboardHeading from "module/dashboard/DashboardHeading";
 import React, { useEffect, useState } from "react";
-import { categoryStatus } from "utils/constants";
+import { categoryStatus, userRole } from "utils/constants";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
+import { useAuth } from "contexts/auth-context";
 
 const CATEGORY_PER_PAGE = 10;
 
@@ -84,7 +85,12 @@ const CategoryManage = () => {
     }
     fetchData();
   }, [filter]);
+  const { userInfo } = useAuth();
   const handleDeleteCategory = async (docId) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      Swal.fire("Failed", "You have no right to do this action", "warning");
+      return;
+    }
     const colRef = doc(db, "categories", docId);
     Swal.fire({
       title: "Are you sure?",
@@ -147,7 +153,7 @@ const CategoryManage = () => {
                   )}
                 </td>
                 <td>
-                  <div className="flex items-center gap-x-3 text-gray-500">
+                  <div className="flex items-center text-gray-500 gap-x-3">
                     <ActionView
                       onClick={() => navigate(`/category/${category.slug}`)}
                     ></ActionView>

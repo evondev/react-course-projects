@@ -32,6 +32,7 @@ const PostManage = () => {
   const [lastDoc, setLastDoc] = useState();
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
+  const { userInfo } = useAuth();
   useEffect(() => {
     async function fetchData() {
       const colRef = collection(db, "posts");
@@ -74,9 +75,11 @@ const PostManage = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && userInfo?.role === userRole.ADMIN) {
         await deleteDoc(docRef);
         Swal.fire("Deleted!", "Your post has been deleted.", "success");
+      } else {
+        Swal.fire("Failed!", "You have no right to delete post", "warning");
       }
     });
   }
