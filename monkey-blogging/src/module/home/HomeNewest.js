@@ -7,7 +7,6 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import PostItem from "module/post/PostItem";
 import PostNewestItem from "module/post/PostNewestItem";
 import PostNewestLarge from "module/post/PostNewestLarge";
 import React, { useEffect, useState } from "react";

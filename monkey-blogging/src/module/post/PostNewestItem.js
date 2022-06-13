@@ -1,4 +1,5 @@
 import React from "react";
+import slugify from "slugify";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
 import PostImage from "./PostImage";
@@ -48,14 +49,24 @@ const PostNewestItemStyles = styled.div`
 `;
 const PostNewestItem = ({ data }) => {
   if (!data.id) return null;
+  const date = data?.createdAt?.seconds
+    ? new Date(data?.createdAt?.seconds * 1000)
+    : new Date();
+  const formatDate = new Date(date).toLocaleDateString("vi-VI");
   return (
     <PostNewestItemStyles>
-      <PostImage url={data.image} alt="" to="/"></PostImage>
+      <PostImage url={data.image} alt="" to={data?.slug}></PostImage>
 
       <div className="post-content">
-        <PostCategory type="secondary">{data.category?.name}</PostCategory>
-        <PostTitle>{data.title}</PostTitle>
-        <PostMeta></PostMeta>
+        <PostCategory to={data?.category?.slug} type="secondary">
+          {data.category?.name}
+        </PostCategory>
+        <PostTitle to={data?.slug}>{data.title}</PostTitle>
+        <PostMeta
+          to={slugify(data?.user?.username || "", { lower: true })}
+          authorName={data?.user?.fullname}
+          date={formatDate}
+        ></PostMeta>
       </div>
     </PostNewestItemStyles>
   );
