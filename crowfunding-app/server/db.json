@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "active": true,
+      "posts": 10,
+      "messages": 50
+    },
+    {
+      "id": 8,
+      "firstName": "Clay",
+      "lastName": "Chung",
+      "active": true,
+      "posts": 8,
+      "messages": 5
+    }
+  ]
+}

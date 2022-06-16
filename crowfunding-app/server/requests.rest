@@ -1,0 +1,26 @@
+GET http://localhost:3009/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXZvbmRldiIsImlhdCI6MTY1NDU4NzczOSwiZXhwIjoxNjU0NTg3NzU0fQ.PUyO0MF30TE2KxW31nClv6_heHEyTZ83xUVXq-ZX3KY
+
+###
+POST https://localhost:4000/token
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXZvbmRldiIsImlhdCI6MTY1NDU4Nzg4MH0.uMGKdE8vCGBSPVXWOF6OWI4REoR3jFSUCyv2e0qh4Ik"
+}
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+  "username": "evondev"
+}
+
+###
+POST  http://localhost:3009/register
+Content-Type:  application/json
+
+{
+  "username": "evondev",
+  "password": "EvondeV"
+}
