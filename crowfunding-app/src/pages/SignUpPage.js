@@ -8,13 +8,30 @@ import FormGroup from "components/common/FormGroup";
 import { Button } from "components/button";
 import { Checkbox } from "components/checkbox";
 import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  name: yup.string().required("This field is required"),
+  email: yup
+    .string()
+    .email("Invalid email address")
+    .required("This field is required"),
+  password: yup
+    .string()
+    .required("This field is required")
+    .min(8, "Password must be 8 character "),
+});
 
 const SignUpPage = () => {
   const {
     handleSubmit,
     control,
-    // formState: { isValid, isSubmitting },
-  } = useForm({});
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
   const handleSignUp = (values) => {
     console.log("handleSignUp ~ values", values);
   };
@@ -40,7 +57,12 @@ const SignUpPage = () => {
       <form onSubmit={handleSubmit(handleSignUp)}>
         <FormGroup>
           <Label htmlFor="name">Full Name *</Label>
-          <Input control={control} name="name" placeholder="Jhon Doe"></Input>
+          <Input
+            control={control}
+            name="name"
+            placeholder="Jhon Doe"
+            error={errors.name?.message}
+          ></Input>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="email">Email *</Label>
@@ -49,6 +71,7 @@ const SignUpPage = () => {
             name="email"
             type="email"
             placeholder="example@gmail.com"
+            error={errors.email?.message}
           ></Input>
         </FormGroup>
         <FormGroup>
@@ -58,6 +81,7 @@ const SignUpPage = () => {
             name="password"
             type="password"
             placeholder="Create a password"
+            error={errors.password?.message}
           ></Input>
         </FormGroup>
         <div className="flex items-start mb-5 gap-x-5">
