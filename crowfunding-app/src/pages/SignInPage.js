@@ -73,7 +73,7 @@ const SignInPage = () => {
             </span>
           </div>
         </FormGroup>
-        <Button className="w-full bg-primary" type="submit">
+        <Button className="w-full" kind="primary" type="submit">
           Sign in
         </Button>
       </form>
