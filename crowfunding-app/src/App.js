@@ -11,6 +11,8 @@ const CampaignPage = lazy(() => import("./pages/CampaignPage"));
 const StartCampaignPage = lazy(() => import("./pages/StartCampaignPage"));
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 const ShippingPage = lazy(() => import("./pages/ShippingPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
+const WithdrawPage = lazy(() => import("./pages/WithdrawPage"));
 
 Modal.setAppElement("#root");
 Modal.defaultStyles = {};
@@ -21,6 +23,11 @@ function App() {
       <Routes>
         <Route element={<LayoutDashboard></LayoutDashboard>}>
           <Route path="/" element={<DashboardPage></DashboardPage>}></Route>
+          <Route
+            path="/withdraw"
+            element={<WithdrawPage></WithdrawPage>}
+          ></Route>
+          <Route path="/payment" element={<PaymentPage></PaymentPage>}></Route>
           <Route
             path="/campaign"
             element={<CampaignPage></CampaignPage>}
