@@ -4,7 +4,7 @@ import DashboardTopbar from "modules/dashboard/DashboardTopbar";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-const LayoutDashboard = ({ children }) => {
+const LayoutDashboard = () => {
   return (
     <div className="min-h-screen p-10 bg-lite">
       <Overlay></Overlay>
