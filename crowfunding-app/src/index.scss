@@ -55,3 +55,46 @@ input:focus + .error-input {
 .scroll-hidden::-webkit-scrollbar {
   display: none;
 }
+// custom date picker
+body {
+  .react-date-picker {
+    @apply w-full px-6 py-4 text-sm font-medium border rounded-xl placeholder:text-text4 dark:placeholder:text-text2 dark:text-white bg-transparent border-strock text-text1 dark:border-darkStroke;
+    height: 54px;
+    .react-date-picker__wrapper {
+      @apply border-none justify-between items-center;
+    }
+    .react-date-picker__clear-button {
+      @apply hidden;
+    }
+    .react-date-picker__inputGroup {
+      min-width: 0;
+      flex-grow: 0;
+    }
+    .react-date-picker__button {
+      padding: 0;
+    }
+  }
+  .react-date-picker__calendar .react-calendar {
+    @apply border-none shadow rounded-lg;
+  }
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    @apply bg-transparent;
+  }
+  .react-calendar__tile:not(.react-calendar__tile--active, .react-calendar__tile--now):enabled:hover,
+  .react-calendar__tile:not(.react-calendar__tile--active, .react-calendar__tile--now):enabled:focus {
+    @apply bg-transparent text-primary;
+  }
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus,
+  .react-calendar__tile--active,
+  .react-calendar__tile--active:hover {
+    @apply bg-primary text-white rounded-lg;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus,
+  .react-calendar__tile--now,
+  .react-calendar__tile--now:hover {
+    @apply bg-secondary text-white rounded-lg;
+  }
+}
