@@ -138,7 +138,9 @@ const PostUpdate = () => {
       imageUploader: {
         // imgbbAPI
         upload: async (file) => {
+          console.log("upload: ~ file", file);
           const bodyFormData = new FormData();
+          console.log("upload: ~ bodyFormData", bodyFormData);
           bodyFormData.append("image", file);
           const response = await axios({
             method: "post",
