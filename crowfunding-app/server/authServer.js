@@ -5,10 +5,12 @@ const app = express();
 app.use(express.json());
 const fs = require("fs");
 const verifyToken = require("./middleware/auth");
-let rawdata = fs.readFileSync("db.json");
-let database = JSON.parse(rawdata);
+const rawdata = fs.readFileSync("db.json");
+const database = JSON.parse(rawdata);
 let users = database.users;
-
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+app.use(cors());
 const generateTokens = (payload) => {
   const { id, username } = payload;
   const accessToken = jwt.sign(
@@ -59,32 +61,41 @@ app.post("/token", (req, res) => {
     return user.refreshToken === refreshToken;
   });
   if (!user) return res.sendStatus(403);
-  try {
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    const tokens = generateTokens(user);
-    updateRefreshToken(user.username, tokens.refreshToken);
-    res.json(tokens);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(403);
-  }
+  const dbPassword = user.password;
+  bcrypt.compare(req.body.password, dbPassword).then((result) => {
+    if (!result) {
+      res.sendStatus(400).json({ error: "Invalid password" });
+    } else {
+      try {
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+        const tokens = generateTokens(user);
+        updateRefreshToken(user.username, tokens.refreshToken);
+        res.json(tokens);
+      } catch (err) {
+        console.log(err);
+        res.sendStatus(403);
+      }
+    }
+  });
 });
 
 app.post("/register", (req, res) => {
-  const { username, password, email } = req.body;
+  const { name, password, email } = req.body;
   const user = users.find((user) => {
-    return user.username === username;
+    return user.email === email;
   });
   if (user) return res.sendStatus(409);
-  users.push({
-    id: users.length + 1,
-    username,
-    password,
-    email,
-    refreshToken: null,
+  bcrypt.hashSync(password, 10).then((hash) => {
+    users.push({
+      id: users.length + 1,
+      name,
+      password: hash,
+      email,
+      refreshToken: null,
+    });
+    fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
+    res.sendStatus(201);
   });
-  fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
-  res.sendStatus(201);
 });
 
 app.delete("/logout", verifyToken, (req, res) => {
