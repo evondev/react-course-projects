@@ -21,10 +21,6 @@ Quill.register("modules/imageUploader", ImageUploader);
 const categoriesData = ["architecture", "education"];
 
 const CampaignAddNew = () => {
-  useEffect(() => {
-    toast.success("Create campaign successfully");
-  });
-
   const { handleSubmit, control, setValue, reset, watch } = useForm();
   const getDropdownLabel = (name, defaultValue = "") => {
     const value = watch(name) || defaultValue;

@@ -1,26 +1,19 @@
-GET http://localhost:3009/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXZvbmRldiIsImlhdCI6MTY1NDU4NzczOSwiZXhwIjoxNjU0NTg3NzU0fQ.PUyO0MF30TE2KxW31nClv6_heHEyTZ83xUVXq-ZX3KY
+GET http://localhost:4001/api/campaigns
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJldm9uZGV2IiwiaWF0IjoxNjYyNDQyOTc3LCJleHAiOjE2NjI0NDMwMDd9.btgYMgl22L8F1M7wLfxfg4qw5JgOvFkkag4LYAGkroY
 
 ###
-POST https://localhost:4000/token
-Content-Type: application/json
-
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXZvbmRldiIsImlhdCI6MTY1NDU4Nzg4MH0.uMGKdE8vCGBSPVXWOF6OWI4REoR3jFSUCyv2e0qh4Ik"
-}
-###
-POST http://localhost:4000/login
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
   "username": "evondev"
 }
 
+
 ###
-POST  http://localhost:3009/register
-Content-Type:  application/json
+POST http://localhost:5000/token
+Content-Type: application/json
 
 {
-  "username": "evondev",
-  "password": "EvondeV"
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJldm9uZGV2IiwiaWF0IjoxNjYyNDQyOTc3LCJleHAiOjE2NjI0NDY1Nzd9.NA7YyGH-lfFHOtYRvbfdOcyaQGr0E6fzc_X2_18kaSM"
 }
