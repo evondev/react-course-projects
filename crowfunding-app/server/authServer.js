@@ -29,7 +29,6 @@ const generateTokens = (payload) => {
   return { accessToken, refreshToken };
 };
 function updateRefreshToken(username, refreshToken) {
-  console.log("app.post ~ users", users);
   users = users.map((user) => {
     if (user.username === username) {
       return {
@@ -71,9 +70,27 @@ app.post("/token", (req, res) => {
   }
 });
 
+app.post("/register", (req, res) => {
+  const { username, password, email } = req.body;
+  const user = users.find((user) => {
+    return user.username === username;
+  });
+  if (user) return res.sendStatus(409);
+  users.push({
+    id: users.length + 1,
+    username,
+    password,
+    email,
+    refreshToken: null,
+  });
+  fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
+  res.sendStatus(201);
+});
+
 app.delete("/logout", verifyToken, (req, res) => {
   const user = users.find((user) => user.id === req.userId);
   updateRefreshToken(user.username, "");
+  res.sendStatus(204);
 });
 
 app.listen(5000, () => console.log("Server auth started on port 5000"));

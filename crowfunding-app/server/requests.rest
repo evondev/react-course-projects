@@ -17,3 +17,7 @@ Content-Type: application/json
 {
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJldm9uZGV2IiwiaWF0IjoxNjYyNDQyOTc3LCJleHAiOjE2NjI0NDY1Nzd9.NA7YyGH-lfFHOtYRvbfdOcyaQGr0E6fzc_X2_18kaSM"
 }
+
+###
+DELETE http://localhost:5000/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJldm9uZGV2IiwiaWF0IjoxNjYyNDQyOTc3LCJleHAiOjE2NjI0NDMwMDd9.btgYMgl22L8F1M7wLfxfg4qw5JgOvFkkag4LYAGkroY
