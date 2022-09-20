@@ -4,7 +4,7 @@ const fs = require("fs");
 const verifyToken = require("./middleware/auth");
 let rawdata = fs.readFileSync("db.json");
 let database = JSON.parse(rawdata);
-const jsonServer = require("json-server");
+// const jsonServer = require("json-server");
 const app = express();
 app.use(express.json());
 // app.use("/api", jsonServer.defaults(), jsonServer.router("db.json"));
@@ -15,4 +15,4 @@ app.get("/api/campaigns", verifyToken, (req, res) => {
   );
 });
 
-app.listen(4001, () => console.log("Server started on port 6000"));
+app.listen(4001, () => console.log("Server started on port 4001"));

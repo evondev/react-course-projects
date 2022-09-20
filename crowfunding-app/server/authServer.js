@@ -42,6 +42,13 @@ function updateRefreshToken(username, refreshToken) {
   });
   fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
 }
+app.get("/me", verifyToken, (req, res) => {
+  console.log(req.userId);
+  const user = users.find((user) => {
+    return user.id === req.userId;
+  });
+  if (!user) return res.sendStatus(401);
+});
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const user = users.find((user) => {
@@ -79,13 +86,18 @@ app.post("/token", (req, res) => {
   });
 });
 
-app.post("/register", (req, res) => {
+app.post("/auth/signup", (req, res) => {
   const { name, password, email } = req.body;
   const user = users.find((user) => {
     return user.email === email;
   });
-  if (user) return res.sendStatus(409);
-  bcrypt.hashSync(password, 10).then((hash) => {
+  if (user) {
+    return res.sendStatus(409).json({ error: "User already exists" });
+  }
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      return;
+    }
     users.push({
       id: users.length + 1,
       name,
