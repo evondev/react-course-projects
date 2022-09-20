@@ -43,13 +43,13 @@ function updateRefreshToken(username, refreshToken) {
   fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
 }
 app.get("/me", verifyToken, (req, res) => {
-  console.log(req.userId);
   const user = users.find((user) => {
     return user.id === req.userId;
   });
   if (!user) return res.sendStatus(401);
+  res.json(user);
 });
-app.post("/login", (req, res) => {
+app.post("/auth/signin", (req, res) => {
   const username = req.body.username;
   const user = users.find((user) => {
     return user.username === username;
@@ -69,7 +69,7 @@ app.post("/token", (req, res) => {
   });
   if (!user) return res.sendStatus(403);
   const dbPassword = user.password;
-  bcrypt.compare(req.body.password, dbPassword).then((result) => {
+  bcrypt.compare(req.body.password, dbPassword, (err, result) => {
     if (!result) {
       res.sendStatus(400).json({ error: "Invalid password" });
     } else {
