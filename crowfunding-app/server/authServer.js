@@ -24,7 +24,7 @@ const generateTokens = (payload) => {
     { id, username },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiresIn: "1h",
+      expiresIn: "24h",
     }
   );
 
@@ -49,7 +49,7 @@ app.get("/me", verifyToken, (req, res) => {
   if (!user) return res.sendStatus(401);
   res.json(user);
 });
-app.post("/auth/signin", (req, res) => {
+app.post("/auth/login", (req, res) => {
   const username = req.body.username;
   const user = users.find((user) => {
     return user.username === username;
@@ -68,25 +68,18 @@ app.post("/token", (req, res) => {
     return user.refreshToken === refreshToken;
   });
   if (!user) return res.sendStatus(403);
-  const dbPassword = user.password;
-  bcrypt.compare(req.body.password, dbPassword, (err, result) => {
-    if (!result) {
-      res.sendStatus(400).json({ error: "Invalid password" });
-    } else {
-      try {
-        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-        const tokens = generateTokens(user);
-        updateRefreshToken(user.username, tokens.refreshToken);
-        res.json(tokens);
-      } catch (err) {
-        console.log(err);
-        res.sendStatus(403);
-      }
-    }
-  });
+  try {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    const tokens = generateTokens(user);
+    updateRefreshToken(user.username, tokens.refreshToken);
+    res.json(tokens);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(403);
+  }
 });
 
-app.post("/auth/signup", (req, res) => {
+app.post("/auth/register", (req, res) => {
   const { name, password, email } = req.body;
   const user = users.find((user) => {
     return user.email === email;
