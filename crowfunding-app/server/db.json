@@ -1,1 +1,69 @@
-{"users":[{"id":1,"username":"evondev","fullname":"Tran Anh Tuan","email":"","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJldm9uZGV2IiwiaWF0IjoxNjYyNDQzMDEwLCJleHAiOjE2NjI0NDY2MTB9.nBUbdovaO6Ccp8H7xC6hoJ1kLepYru2Ugf69iiebOHY"},{"id":2,"name":"evondev","password":"sdfsdfsdfsdafsfadsfsad","email":"trananhtuan400@gmail.com","refreshToken":null}],"categories":[],"campaigns":[{"title":"Building Hope Village","short_description":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus perspiciatis libero hic, dolor excepturi numquam eum nam nemo quae repellendus mollitia nihil laborum voluptatum quasi molestias aperiam dolore itaque iste!","goal":"100","amount":"200","prefilled":"10,20","video":"https://www.youtube.com/watch?v=yYGqCemyGmE&ab_channel=evondev","country":"Vietnam","content":"<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus perspiciatis libero hic, dolor excepturi numquam eum nam nemo quae repellendus mollitia nihil laborum voluptatum quasi molestias aperiam dolore itaque iste!</p>","startDate":"2022-08-22T17:00:00.000Z","endDate":"2022-08-27T17:00:00.000Z","id":1,"userId":1},{"title":"","short_description":"","goal":"","amount":"","prefilled":"","video":"","country":"Peru","category":"architecture","featured_image":"https://source.unsplash.com/random","content":"<p><br></p>","startDate":"2022-08-23T16:36:28.627Z","endDate":"2022-08-23T16:36:28.627Z","id":2,"userId":2},{"title":"","short_description":"","goal":"","amount":"","prefilled":"","video":"","featured_image":{"medium":"https://i.ibb.co/yNwFTdv/Crowfunding.png","thumb":"https://i.ibb.co/6y30hr9/Crowfunding.png","url":"https://i.ibb.co/p1tjDbV/Crowfunding.png"},"content":"","startDate":"2022-08-23T17:12:09.546Z","endDate":"2022-08-23T17:12:09.546Z","id":3,"userId":3}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "evondev",
+      "password": "$2b$10$SC07ZDAR1dKfbI8PfNDf8OaqEE1nuN6WCILMzep/EkW.GEk/Yohhq",
+      "email": "evondevblog@gmail.com",
+      "refreshToken": null
+    },
+    {
+      "id": 2,
+      "name": "tuan",
+      "password": "$2b$10$Wy6phctMM7xSJ/N4rs3qn./3gKOuzaUdNQN1i.6UeLb0RdfYI.bt.",
+      "email": "tuan@gmail.com",
+      "refreshToken": null
+    }
+  ],
+  "categories": [],
+  "campaigns": [
+    {
+      "title": "Building Hope Village",
+      "short_description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus perspiciatis libero hic, dolor excepturi numquam eum nam nemo quae repellendus mollitia nihil laborum voluptatum quasi molestias aperiam dolore itaque iste!",
+      "goal": "100",
+      "amount": "200",
+      "prefilled": "10,20",
+      "video": "https://www.youtube.com/watch?v=yYGqCemyGmE&ab_channel=evondev",
+      "country": "Vietnam",
+      "content": "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus perspiciatis libero hic, dolor excepturi numquam eum nam nemo quae repellendus mollitia nihil laborum voluptatum quasi molestias aperiam dolore itaque iste!</p>",
+      "startDate": "2022-08-22T17:00:00.000Z",
+      "endDate": "2022-08-27T17:00:00.000Z",
+      "id": 1,
+      "userId": 1
+    },
+    {
+      "title": "",
+      "short_description": "",
+      "goal": "",
+      "amount": "",
+      "prefilled": "",
+      "video": "",
+      "country": "Peru",
+      "category": "architecture",
+      "featured_image": "https://source.unsplash.com/random",
+      "content": "<p><br></p>",
+      "startDate": "2022-08-23T16:36:28.627Z",
+      "endDate": "2022-08-23T16:36:28.627Z",
+      "id": 2,
+      "userId": 2
+    },
+    {
+      "title": "",
+      "short_description": "",
+      "goal": "",
+      "amount": "",
+      "prefilled": "",
+      "video": "",
+      "featured_image": {
+        "medium": "https://i.ibb.co/yNwFTdv/Crowfunding.png",
+        "thumb": "https://i.ibb.co/6y30hr9/Crowfunding.png",
+        "url": "https://i.ibb.co/p1tjDbV/Crowfunding.png"
+      },
+      "content": "",
+      "startDate": "2022-08-23T17:12:09.546Z",
+      "endDate": "2022-08-23T17:12:09.546Z",
+      "id": 3,
+      "userId": 3
+    }
+  ]
+}
