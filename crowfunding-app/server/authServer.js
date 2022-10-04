@@ -56,10 +56,15 @@ app.post("/auth/login", (req, res) => {
   });
   if (!user) return res.sendStatus(401);
   const dbPassword = user.password;
-  console.log("app.post ~ dbPassword", dbPassword);
-  console.log("app.post ~ dbPassword", req.body.password);
   bcrypt.compare(req.body.password, dbPassword, (err, hash) => {
-    if (err || !hash) return;
+    if (err || !hash) {
+      res.status(403).json({
+        statusCode: 403,
+        error: {
+          message: "Password does not match",
+        },
+      });
+    }
     const tokens = generateTokens(user);
 
     updateRefreshToken(user.username, tokens.refreshToken);

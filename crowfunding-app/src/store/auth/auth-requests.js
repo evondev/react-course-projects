@@ -10,3 +10,12 @@ export const requestAuthLogin = (data) => {
     ...data,
   });
 };
+export const requestAuthFetchMe = (token) => {
+  if (!token) return;
+  return axios.get("/me", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

@@ -4,6 +4,8 @@ import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Modal from "react-modal";
 import LayoutPayment from "layout/LayoutPayment";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
@@ -18,6 +20,14 @@ Modal.setAppElement("#root");
 Modal.defaultStyles = {};
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user && user.id) {
+      //
+    } else {
+    }
+  }, [user]);
   return (
     <Suspense>
       <Routes>
