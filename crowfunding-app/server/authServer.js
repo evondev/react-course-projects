@@ -50,15 +50,21 @@ app.get("/me", verifyToken, (req, res) => {
   res.json(user);
 });
 app.post("/auth/login", (req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const user = users.find((user) => {
-    return user.username === username;
+    return user.email === email;
   });
   if (!user) return res.sendStatus(401);
-  const tokens = generateTokens(user);
+  const dbPassword = user.password;
+  console.log("app.post ~ dbPassword", dbPassword);
+  console.log("app.post ~ dbPassword", req.body.password);
+  bcrypt.compare(req.body.password, dbPassword, (err, hash) => {
+    if (err || !hash) return;
+    const tokens = generateTokens(user);
 
-  updateRefreshToken(username, tokens.refreshToken);
-  res.json(tokens);
+    updateRefreshToken(user.username, tokens.refreshToken);
+    res.json(tokens);
+  });
 });
 
 app.post("/token", (req, res) => {
