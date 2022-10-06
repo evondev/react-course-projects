@@ -15,13 +15,11 @@ const authSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    authUpdateUser: (state, action) => {
-      return {
-        ...state,
-        user: action.payload.user,
-        accessToken: action.payload.accessToken,
-      };
-    },
+    authUpdateUser: (state, action) => ({
+      ...state,
+      user: action.payload.user,
+      accessToken: action.payload.accessToken,
+    }),
     authFetchMe: (state, action) => ({
       ...state,
       ...action.payload,

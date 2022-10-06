@@ -4,6 +4,7 @@ import { saveToken } from "utils/auth";
 import {
   requestAuthFetchMe,
   requestAuthLogin,
+  requestAuthRefreshToken,
   requestAuthRegister,
 } from "./auth-requests";
 import { authUpdateUser } from "./auth-slice";
@@ -50,4 +51,18 @@ function* handleAuthFetchMe({ payload }) {
   } catch (error) {}
 }
 
-export { handleAuthLogin, handleAuthFetchMe };
+function* handleAuthRefreshToken({ payload }) {
+  try {
+    const response = yield call(requestAuthRefreshToken, payload);
+    if (response.data) {
+      saveToken(response.data.accessToken, response.data.refreshToken);
+      yield call(handleAuthFetchMe, {
+        payload: response.data.accessToken,
+      });
+    } else {
+      // Logout
+    }
+  } catch (error) {}
+}
+
+export { handleAuthLogin, handleAuthFetchMe, handleAuthRefreshToken };

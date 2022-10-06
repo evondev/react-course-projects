@@ -24,7 +24,7 @@ const generateTokens = (payload) => {
     { id, username },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiresIn: "24h",
+      expiresIn: "48h",
     }
   );
 
