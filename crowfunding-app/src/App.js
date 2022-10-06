@@ -7,7 +7,7 @@ import LayoutPayment from "layout/LayoutPayment";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
-import { getToken } from "utils/auth";
+import { getToken, logOut } from "utils/auth";
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
@@ -39,9 +39,10 @@ function App() {
         dispatch(authRefreshToken(refresh_token));
       } else {
         dispatch(authUpdateUser({}));
+        logOut();
       }
     }
-  }, [user]);
+  }, [dispatch, user]);
   return (
     <Suspense>
       <Routes>

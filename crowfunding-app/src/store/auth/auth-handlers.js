@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { call, put } from "redux-saga/effects";
-import { saveToken } from "utils/auth";
+import { logOut, saveToken } from "utils/auth";
 import {
   requestAuthFetchMe,
   requestAuthLogin,
@@ -60,9 +60,24 @@ function* handleAuthRefreshToken({ payload }) {
         payload: response.data.accessToken,
       });
     } else {
-      // Logout
+      yield handleAuthLogOut();
     }
   } catch (error) {}
 }
 
-export { handleAuthLogin, handleAuthFetchMe, handleAuthRefreshToken };
+function* handleAuthLogOut() {
+  yield put(
+    authUpdateUser({
+      user: undefined,
+      accessToken: null,
+    })
+  );
+  logOut();
+}
+
+export {
+  handleAuthLogin,
+  handleAuthFetchMe,
+  handleAuthRefreshToken,
+  handleAuthLogOut,
+};
