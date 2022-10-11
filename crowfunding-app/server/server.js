@@ -10,9 +10,7 @@ app.use(express.json());
 // app.use("/api", jsonServer.defaults(), jsonServer.router("db.json"));
 
 app.get("/api/campaigns", verifyToken, (req, res) => {
-  res.json(
-    database.campaigns.filter((campaign) => campaign.userId === req.userId)
-  );
+  res.json(database.campaigns);
 });
 
 app.listen(4001, () => console.log("Server started on port 4001"));

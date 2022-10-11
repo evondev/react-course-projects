@@ -9,7 +9,6 @@ const authSlice = createSlice({
   reducers: {
     authLogin: (state, action) => ({
       ...state,
-      ...action.payload,
     }),
     authRegister: (state, action) => ({
       ...state,
