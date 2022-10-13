@@ -12,16 +12,12 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 app.use(cors());
 const generateTokens = (payload) => {
-  const { id, username } = payload;
-  const accessToken = jwt.sign(
-    { id, username },
-    process.env.ACCESS_TOKEN_SECRET,
-    {
-      expiresIn: "10s",
-    }
-  );
+  const { id, name } = payload;
+  const accessToken = jwt.sign({ id, name }, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "5m",
+  });
   const refreshToken = jwt.sign(
-    { id, username },
+    { id, name },
     process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: "48h",
@@ -30,9 +26,10 @@ const generateTokens = (payload) => {
 
   return { accessToken, refreshToken };
 };
-function updateRefreshToken(username, refreshToken) {
+function updateRefreshToken(name, refreshToken) {
+  console.log("updateRefreshToken ~ name", name);
   users = users.map((user) => {
-    if (user.username === username) {
+    if (user.name === name) {
       return {
         ...user,
         refreshToken,
@@ -67,7 +64,7 @@ app.post("/auth/login", (req, res) => {
     }
     const tokens = generateTokens(user);
 
-    updateRefreshToken(user.username, tokens.refreshToken);
+    updateRefreshToken(user.name, tokens.refreshToken);
     res.json(tokens);
   });
 });
@@ -82,7 +79,7 @@ app.post("/token", (req, res) => {
   try {
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
     const tokens = generateTokens(user);
-    updateRefreshToken(user.username, tokens.refreshToken);
+    updateRefreshToken(user.name, tokens.refreshToken);
     res.json(tokens);
   } catch (err) {
     console.log(err);
@@ -91,7 +88,7 @@ app.post("/token", (req, res) => {
 });
 
 app.post("/auth/register", (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, password, email, roles, permissions } = req.body;
   const user = users.find((user) => {
     return user.email === email;
   });
@@ -108,6 +105,8 @@ app.post("/auth/register", (req, res) => {
       password: hash,
       email,
       refreshToken: null,
+      roles,
+      permissions,
     });
     fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
     res.sendStatus(201);
@@ -116,7 +115,7 @@ app.post("/auth/register", (req, res) => {
 
 app.delete("/logout", verifyToken, (req, res) => {
   const user = users.find((user) => user.id === req.userId);
-  updateRefreshToken(user.username, "");
+  updateRefreshToken(user.name, "");
   res.sendStatus(204);
 });
 
