@@ -4,6 +4,7 @@ const verifyToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
   // [Bearers,token]
   const token = authHeader && authHeader.split(" ")[1];
+  console.log("verifyToken ~ token", token);
 
   if (!token) return res.sendStatus(401);
   try {
