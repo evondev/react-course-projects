@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
 import { getToken, logOut } from "utils/auth";
+import axios from "axios";
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
@@ -22,6 +23,19 @@ Modal.setAppElement("#root");
 Modal.defaultStyles = {};
 
 function App() {
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await axios.post(
+  //       "/demo",
+  //       {},
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer Token`,
+  //         },
+  //       }
+  //     );
+  //   }
+  // }, []);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
