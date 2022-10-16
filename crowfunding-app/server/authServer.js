@@ -88,7 +88,7 @@ app.post("/token", (req, res) => {
 });
 
 app.post("/auth/register", (req, res) => {
-  const { name, password, email, roles, permissions } = req.body;
+  const { name, password, email, permissions } = req.body;
   const user = users.find((user) => {
     return user.email === email;
   });
@@ -105,7 +105,6 @@ app.post("/auth/register", (req, res) => {
       password: hash,
       email,
       refreshToken: null,
-      roles,
       permissions,
     });
     fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));

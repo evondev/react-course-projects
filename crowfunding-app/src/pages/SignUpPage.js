@@ -39,7 +39,7 @@ const SignUpPage = () => {
   const dispatch = useDispatch();
   const handleSignUp = async (values) => {
     try {
-      dispatch(authRegister(values));
+      dispatch(authRegister({ ...values, permissions: [] }));
       reset({});
     } catch (error) {
       console.log(error);
