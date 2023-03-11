@@ -9,8 +9,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LayoutDashboard from "layout/LayoutDashboard";
-
-import { permissions } from "constants/permissions";
 import RequiredAuthPage from "pages/RequiredAuthPage";
 import CampaignView from "modules/campaign/CampaignView";
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
@@ -46,6 +44,19 @@ const router = createBrowserRouter([
         path: "/unauthorize",
         element: <UnauthorizePage></UnauthorizePage>,
       },
+      {
+        element: <RequiredAuthPage allowPermissions={[]}></RequiredAuthPage>,
+        children: [
+          {
+            path: "/start-campaign",
+            element: <StartCampaignPage></StartCampaignPage>,
+          },
+          {
+            path: "/campaign/:slug",
+            element: <CampaignView></CampaignView>,
+          },
+        ],
+      },
     ],
   },
   {
@@ -56,30 +67,13 @@ const router = createBrowserRouter([
     path: "/login",
     element: <SignInPage></SignInPage>,
   },
-  {
-    element: (
-      <RequiredAuthPage
-        allowPermissions={[permissions.campaign.CREATE_CAMPAIGN]}
-      ></RequiredAuthPage>
-    ),
-    children: [
-      {
-        path: "/start-campaign",
-        element: <StartCampaignPage></StartCampaignPage>,
-      },
-      {
-        path: "/campaign/:slug",
-        element: <CampaignView></CampaignView>,
-      },
-    ],
-  },
 ]);
 createRoot(container).render(
   <Provider store={store}>
     <Suspense fallback={<p></p>}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <App>
+        <RouterProvider router={router}></RouterProvider>
+      </App>
     </Suspense>
     <ToastContainer bodyClassName="font-primary text-sm"></ToastContainer>
   </Provider>

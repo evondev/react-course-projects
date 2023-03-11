@@ -17,13 +17,13 @@ const schema = yup
     password: yup
       .string()
       .min(8, "Your password must be at least 8 characters or greater")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        {
-          message:
-            "Your password must have at least 1 uppercase, 1 lowercase, 1 special character",
-        }
-      )
+      // .matches(
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      //   {
+      //     message:
+      //       "Your password must have at least 1 uppercase, 1 lowercase, 1 special character",
+      //   }
+      // )
       .required("Please enter your password"),
     gender: yup
       .string()
@@ -75,7 +75,7 @@ const RegisterHook = () => {
       gender: "male",
     },
   });
-
+  console.log(errors);
   // console.log("RegisterHook ~ isSubmitting", isSubmitting);
   // console.log("RegisterHook ~ errors", errors);
   const onSubmitHandler = (values) => {

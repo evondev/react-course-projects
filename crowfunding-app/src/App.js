@@ -8,12 +8,13 @@ import { getToken, logOut } from "utils/auth";
 Modal.setAppElement("#root");
 Modal.defaultStyles = {};
 
-function App() {
+function App({ children }) {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     if (user && user.id) {
       const { access_token } = getToken();
+      console.log("useEffect ~ access_token:", access_token);
       dispatch(
         authUpdateUser({
           user: user,
@@ -30,7 +31,7 @@ function App() {
       }
     }
   }, [dispatch, user]);
-  return <></>;
+  return <>{children}</>;
 }
 
 export default App;
