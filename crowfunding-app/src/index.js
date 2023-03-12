@@ -57,6 +57,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "*",
+        element: <>This page is not exist</>,
+      },
     ],
   },
   {
