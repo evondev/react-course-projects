@@ -12,10 +12,11 @@ export default function useRefreshToken() {
     });
     if (!response.data) return null;
     saveToken(response.data.accessToken, response.data.refreshToken);
-    authUpdateUser((prev) => ({
-      ...prev,
-      accessToken: response.data.accessToken,
-    }));
+    // wrong code so I commented
+    // authUpdateUser((prev) => ({
+    //   ...prev,
+    //   accessToken: response.data.accessToken,
+    // }));
     return response.data.accessToken || "";
   }
   return refresh;
