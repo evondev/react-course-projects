@@ -118,4 +118,4 @@ app.delete("/logout", verifyToken, (req, res) => {
   res.sendStatus(204);
 });
 
-app.listen(5000, () => console.log("Server auth started on port 5000"));
+app.listen(5001, () => console.log("Server auth started on port 5001"));
